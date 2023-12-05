@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 
 	"unicode"
 
@@ -42,7 +41,7 @@ func PartOne() {
 
 	}
 
-	sum, err := SumStringNumbers(result)
+	sum, err := utils.SumStringNumbers(result)
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
@@ -87,15 +86,4 @@ func PartTwo() {
 	// } else {
 	// 	fmt.Println("Part two Sum:", sum)
 	// }
-}
-func SumStringNumbers(strs []string) (int, error) {
-	var sum int
-	for _, str := range strs {
-		num, err := strconv.Atoi(str)
-		if err != nil {
-			return 0, err
-		}
-		sum += num
-	}
-	return sum, nil
 }
