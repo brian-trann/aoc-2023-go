@@ -1,1 +1,3 @@
 # Advent of Code - 2023 - Go
+
+Trying to learn / get better at golang...
