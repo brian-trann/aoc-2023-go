@@ -14,6 +14,17 @@ type GameData struct {
 }
 
 func main() {
+	PartOne()
+	PartTwo()
+}
+
+const (
+	redMax   = 12
+	greenMax = 13
+	blueMax  = 14
+)
+
+func PartOne() {
 	lines := utils.OpenFile("./input.txt")
 	var validIds []string
 	for _, line := range lines {
@@ -31,15 +42,18 @@ func main() {
 	} else {
 		fmt.Println("Part one Sum:", sum)
 	}
-
 }
 
-const (
-	redMax   = 12
-	greenMax = 13
-	blueMax  = 14
-)
-
+func PartTwo() {
+	lines := utils.OpenFile("./input.txt")
+	total := 0
+	for _, line := range lines {
+		gameData := ParseGameString(line)
+		productOfList := GetMaxColorCountProduct(gameData.List)
+		total += productOfList
+	}
+	fmt.Println("Part two Sum:", total)
+}
 func ParseGameString(input string) GameData {
 
 	// Skip the "Game " part.
@@ -71,7 +85,7 @@ func CheckSublists(list string) bool {
 
 			// trim; get color and count
 			segment = strings.TrimSpace(segment)
-			fmt.Println((segment))
+			// fmt.Println((segment))
 			parts := strings.Fields(segment)
 
 			if len(parts) == 2 {
@@ -100,4 +114,41 @@ func CheckSublists(list string) bool {
 	}
 
 	return true
+}
+func GetMaxColorCountProduct(list string) int {
+	maxRed, maxGreen, maxBlue := 0, 0, 0
+
+	sublists := strings.Split(list, ";")
+	for _, sublist := range sublists {
+		redCount, greenCount, blueCount := 0, 0, 0
+
+		colorSegments := strings.Split(sublist, ",")
+		for _, segment := range colorSegments {
+			segment = strings.TrimSpace(segment)
+			parts := strings.Fields(segment)
+			if len(parts) == 2 {
+				count, err := strconv.Atoi(parts[0])
+				if err != nil {
+					fmt.Printf("error parsing count from segment '%s': %s\n", segment, err)
+					continue
+				}
+
+				switch strings.ToLower(parts[1]) {
+				case "red":
+					redCount = max(redCount, count)
+				case "green":
+					greenCount = max(greenCount, count)
+				case "blue":
+					blueCount = max(blueCount, count)
+				}
+			}
+		}
+
+		// update the overall maximum counts
+		maxRed = max(maxRed, redCount)
+		maxGreen = max(maxGreen, greenCount)
+		maxBlue = max(maxBlue, blueCount)
+	}
+
+	return maxRed * maxGreen * maxBlue
 }
