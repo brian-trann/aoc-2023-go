@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+
 	"strconv"
 )
 
@@ -30,4 +31,19 @@ func SumStringNumbers(strs []string) (int, error) {
 		sum += num
 	}
 	return sum, nil
+}
+func OpenFileTo2dArray(fileName string) [][]rune {
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Fatalln((err))
+	}
+	defer file.Close()
+	var array [][]rune
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		row := []rune(line)
+		array = append(array, row)
+	}
+	return array
 }
