@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	lines := utils.OpenFile("./input.txt")
+	lines := utils.OpenFileSliceStrings("./input.txt")
 	var cardData []CardData
 	for _, line := range lines {
 		parsedData := ParseCardString(line)

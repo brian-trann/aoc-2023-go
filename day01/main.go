@@ -14,7 +14,7 @@ func main() {
 }
 
 func PartOne() {
-	lines := utils.OpenFile("./input.txt")
+	lines := utils.OpenFileSliceStrings("./input.txt")
 	var result []string
 	for _, line := range lines {
 		first := byte('0')

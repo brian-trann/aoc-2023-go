@@ -25,7 +25,7 @@ const (
 )
 
 func PartOne() {
-	lines := utils.OpenFile("./input.txt")
+	lines := utils.OpenFileSliceStrings("./input.txt")
 	var validIds []string
 	for _, line := range lines {
 		gameData := ParseGameString(line)
@@ -45,7 +45,7 @@ func PartOne() {
 }
 
 func PartTwo() {
-	lines := utils.OpenFile("./input.txt")
+	lines := utils.OpenFileSliceStrings("./input.txt")
 	total := 0
 	for _, line := range lines {
 		gameData := ParseGameString(line)

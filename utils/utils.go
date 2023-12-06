@@ -4,11 +4,12 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"strings"
 
 	"strconv"
 )
 
-func OpenFile(fileName string) []string {
+func OpenFileSliceStrings(fileName string) []string {
 	file, err := os.Open(fileName)
 	if err != nil {
 		log.Fatalln((err))
@@ -20,6 +21,22 @@ func OpenFile(fileName string) []string {
 		lines = append(lines, scanner.Text())
 	}
 	return lines
+}
+
+func OpenFileAsString(fileName string) string {
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer file.Close()
+
+	var builder strings.Builder
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		builder.WriteString(scanner.Text() + "\n") // Add a newline character after each line
+	}
+
+	return builder.String()
 }
 func SumStringNumbers(strs []string) (int, error) {
 	var sum int
