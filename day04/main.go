@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
-	"strconv"
+
 	"strings"
 
 	"github.com/brian-trann/aoc-2023-go/utils"
@@ -49,8 +49,8 @@ func ParseCardString(input string) CardData {
 	cardSplitStart := strings.Index(list, "|")
 	winningCardsStr := strings.TrimSpace(list[0:cardSplitStart])
 	myCardsStr := strings.TrimSpace(list[cardSplitStart+1:])
-	winningCards := ConvertStringToIntSlice(winningCardsStr, " ")
-	myCards := ConvertStringToIntSlice(myCardsStr, " ")
+	winningCards := utils.ConvertStringToIntSlice(winningCardsStr, " ")
+	myCards := utils.ConvertStringToIntSlice(myCardsStr, " ")
 
 	return CardData{Id: cardId, WinningCards: winningCards, MyCards: myCards}
 
@@ -77,22 +77,6 @@ func (c *CardData) initializeWinningSet() {
 	c.WinningCardCount = len(c.WinningCards)
 }
 
-func ConvertStringToIntSlice(input string, delimiter string) []int {
-	var result []int
-	substrings := strings.Split(input, delimiter)
-	for _, s := range substrings {
-		num, err := strconv.Atoi(s)
-		if err != nil {
-
-			// fmt.Println("error parsing strign to int")
-			// continue
-		} else {
-
-			result = append(result, num)
-		}
-	}
-	return result
-}
 func (c *CardData) countMyWinningCards() {
 	count := 0
 	for _, card := range c.MyCards {

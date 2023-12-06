@@ -64,3 +64,19 @@ func OpenFileTo2dArray(fileName string) [][]rune {
 	}
 	return array
 }
+func ConvertStringToIntSlice(input string, delimiter string) []int {
+	var result []int
+	substrings := strings.Split(input, delimiter)
+	for _, s := range substrings {
+		num, err := strconv.Atoi(s)
+		if err != nil {
+
+			// fmt.Println("error parsing strign to int")
+			// continue
+		} else {
+
+			result = append(result, num)
+		}
+	}
+	return result
+}
