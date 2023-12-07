@@ -80,3 +80,11 @@ func ConvertStringToIntSlice(input string, delimiter string) []int {
 	}
 	return result
 }
+
+func ProductOfArray(arr []int) int {
+	product := 1
+	for _, num := range arr {
+		product *= num
+	}
+	return product
+}

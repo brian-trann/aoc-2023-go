@@ -41,7 +41,7 @@ func main() {
 	}
 	gearRatio := 0
 	for _, item := range filterdSpecialChars {
-		product := productOfArray(item.Neighbors)
+		product := utils.ProductOfArray(item.Neighbors)
 		gearRatio += product
 	}
 	fmt.Printf("part 2: %d\n\n", gearRatio)
@@ -187,11 +187,4 @@ func FindSpecialCharNeighbors(array [][]rune, numbers []NumberWithInfo) []Specia
 		}
 	}
 	return specialCharNeighbors
-}
-func productOfArray(arr []int) int {
-	product := 1
-	for _, num := range arr {
-		product *= num
-	}
-	return product
 }
